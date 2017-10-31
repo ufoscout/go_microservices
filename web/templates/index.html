@@ -4,7 +4,7 @@
 
 <h1>Silent Hello test</h1>
 <div>
-    This trigger an async message, check the server output.
+    This sends an async message through the client. Check the server logs output.
 </div>
 <form id="hello">
     <div>
@@ -18,7 +18,7 @@
 
 <h1>Echo test</h1>
 <div>
-    This sends a message through the client and waits for a reply
+    This sends a message through the client and waits for a reply.
 </div>
 <form id="echo">
     <div>
@@ -47,6 +47,9 @@ $(document).ready(function(){
         e.preventDefault();
         let message = $("#echo input").val();
         console.log("echo message: " + message);
+        $.get( "/echo?message=" + message, function( data ) {
+            console.log("message sent");
+        });
     });
 
 });

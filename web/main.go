@@ -18,6 +18,11 @@ func main() {
 		c.String(http.StatusOK, "")
 	})
 
+	r.GET("/echo", func(c *gin.Context) {
+		name := c.DefaultQuery("message", "echo")
+		c.String(http.StatusOK, client.Echo(name))
+	})
+
 	//r.LoadHTMLGlob("templates/**/*.html")
 	r.Static("/vendor", "./vendor")
 	r.StaticFile("/", "./templates/index.html")

@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"runtime"
+	"strconv"
 
 	"github.com/nats-io/go-nats"
 )
@@ -24,6 +25,10 @@ func main() {
 	nc.Subscribe("echo", func(msg *nats.Msg) {
 		i++
 		printMsg(msg, i)
+		reply := "(" + strconv.Itoa(i) + ") " + string(msg.Data)
+		log.Printf("[#%d] Replying: '%s' on [%s]\n", i, reply, msg.Reply)
+
+		nc.Publish(msg.Reply, []byte(reply))
 	})
 
 	nc.Subscribe("hello", func(msg *nats.Msg) {
