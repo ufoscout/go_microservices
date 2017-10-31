@@ -16,6 +16,9 @@ FROM alpine:3.5
 #RUN apk --no-cache add ca-certificates
 #WORKDIR /root/
 
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.0.0/wait /wait
+RUN chmod +x /wait
+
 COPY --from=builder /hello /hello
 
-CMD ["/hello"] 
+CMD /wait && /hello

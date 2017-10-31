@@ -7,8 +7,8 @@ services:
     build: .
 #    volumes:
 #      - ./src:/src
-#    environment: 
-#      WAIT_HOSTS: db:5432
+    environment: 
+      WAIT_HOSTS: nats:4222
 #      GIN_MODE: release
     ports:
       - "8000:8000"
@@ -18,3 +18,10 @@ services:
     #hostname: postgres
 #    ports:
 #      - "5432:5432"
+
+  nats:
+    image: nats
+    ports:
+      - "4222:4222"
+      - "6222:6222"
+      - "8222:8222"
