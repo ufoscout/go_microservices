@@ -1,0 +1,4 @@
+package: github.com/ufoscout/go_microservices
+import:
+- package: github.com/gin-gonic/gin
+  version: ^1.2
