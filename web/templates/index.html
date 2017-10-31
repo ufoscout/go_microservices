@@ -1,0 +1,56 @@
+<html>
+
+<script src="/vendor/jquery-3.2.1.min.js"></script>
+
+<h1>Silent Hello test</h1>
+<div>
+    This trigger an async message, check the server output.
+</div>
+<form id="hello">
+    <div>
+        <label for="hello">Hello to:</label>
+        <input type="text" name="hello">
+    </div>
+    <div class="button">
+        <button>Say Hello</button>
+    </div>
+</form>
+
+<h1>Echo test</h1>
+<div>
+    This sends a message through the client and waits for a reply
+</div>
+<form id="echo">
+    <div>
+        <label for="message">Message:</label>
+        <input type="text" name="message">
+    </div>
+    <div class="button">
+        <button>Echo</button>
+    </div>
+</form>
+
+
+<script>
+$(document).ready(function(){
+
+    $("#hello .button").click(function(e) {
+        e.preventDefault();
+        let message = $("#hello input").val();
+        console.log("Sending hello to: " + message);
+        $.get( "/hello?name=" + message, function( data ) {
+            console.log("hello sent");
+        });
+    });
+
+    $("#echo .button").click(function(e) {
+        e.preventDefault();
+        let message = $("#echo input").val();
+        console.log("echo message: " + message);
+    });
+
+});
+
+</script>
+
+</html>

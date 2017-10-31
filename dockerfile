@@ -8,7 +8,7 @@ ADD ./ $SRC
 WORKDIR $SRC
 
 RUN glide up
-RUN go build -o /hello ./web/hello.go
+RUN go build -o /web ./web/main.go
 
 #RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 
@@ -19,6 +19,6 @@ FROM alpine:3.5
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.0.0/wait /wait
 RUN chmod +x /wait
 
-COPY --from=builder /hello /hello
+COPY --from=builder /web /web
 
-CMD /wait && /hello
+CMD /wait && /web

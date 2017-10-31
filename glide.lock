@@ -1,5 +1,5 @@
 hash: b7eb7c5b48a9d4fbefc7d819eef8198fa45cd1cd1e740cbd4c194a7632b058e9
-updated: 2017-10-31T15:13:29.222292652+01:00
+updated: 2017-10-31T15:20:48.632001057+01:00
 imports:
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
@@ -16,6 +16,11 @@ imports:
   version: a5cdd64afdee435007ee3e9f6ed4684af949d568
 - name: github.com/nats-io/go-nats
   version: 29f9728a183bf3fa7e809e14edac00b33be72088
+  subpackages:
+  - encoders/builtin
+  - util
+- name: github.com/nats-io/nuid
+  version: 33c603157d6fd1b0ac2599bcc4a286b36479a06d
 - name: github.com/ugorji/go
   version: d03304bb1d83c196fd3017dca37e89a4504b3676
   subpackages:
