@@ -2,13 +2,14 @@ package client
 
 import (
 	"log"
+	"os"
 	"time"
 
 	"github.com/nats-io/go-nats"
 )
 
 func Hello(name string) {
-	url := nats.DefaultURL
+	url := getNatsURL()
 	nc, err := nats.Connect(url)
 	if err != nil {
 		log.Fatalf("Can't connect: %v\n", err)
@@ -29,7 +30,7 @@ func Hello(name string) {
 }
 
 func Echo(message string) string {
-	url := nats.DefaultURL
+	url := getNatsURL()
 	nc, err := nats.Connect(url)
 	if err != nil {
 		log.Fatalf("Can't connect: %v\n", err)
@@ -51,4 +52,11 @@ func Echo(message string) string {
 	log.Printf("Received [%v] : '%s'\n", msg.Subject, string(msg.Data))
 
 	return string(msg.Data)
+}
+
+func getNatsURL() string {
+	if value, ok := os.LookupEnv("NATS_URL"); ok {
+		return value
+	}
+	return nats.DefaultURL
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 	"runtime"
 	"strconv"
 
@@ -13,8 +14,7 @@ func printMsg(m *nats.Msg, i int) {
 }
 
 func main() {
-
-	url := nats.DefaultURL
+	url := getNatsURL()
 	nc, err := nats.Connect(url)
 	if err != nil {
 		log.Fatalf("Can't connect: %v\n", err)
@@ -40,4 +40,11 @@ func main() {
 
 	log.Printf("Connected to Nats at '%s'\n", url)
 	runtime.Goexit()
+}
+
+func getNatsURL() string {
+	if value, ok := os.LookupEnv("NATS_URL"); ok {
+		return value
+	}
+	return nats.DefaultURL
 }
